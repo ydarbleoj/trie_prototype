@@ -1,3 +1,4 @@
+require 'pry'
 require 'sinatra'
 require 'sinatra/reloader'
 require 'sinatra-websocket'
@@ -12,11 +13,11 @@ get '/*'  do
     request.websocket do |ws|
       ws.onopen do
         settings.sockets << ws
-        File.open("tiny_titles").each_line do |l|
+        File.open("mini_titles").each_line do |l|
           ws.send(l.downcase.chomp)
-          sleep(0.0000000000000001)
+          sleep(0.00001)
         end
-        ws.close
+        ws.close_websocket
       end
       ws.onclose do
         settings.sockets.delete(ws)
