@@ -18,3 +18,4 @@ window.App = {
 $(document).ready(function(){
   App.initialize();
 });
+
