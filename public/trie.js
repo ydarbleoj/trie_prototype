@@ -2,7 +2,24 @@ Trie = function(){
   this.characters = {};
 };
 
+
+
 Trie.prototype.learn = function(word, index){
+
+  index = index || 0;
+  var char = word[index];
+  if (this.characters[char]) {
+    this.characters[char].learn(word, index + 1);
+  }else{
+    // index 
+    if  (index === word.length) {
+      this.isWord = true;
+    } else { 
+    this.characters[char] = new Trie();
+    this.characters[char].learn(word, index + 1);
+    }
+  }
+
   // This function should add the given word,
   // starting from the given index,
   // to this Trie.
@@ -23,6 +40,26 @@ Trie.prototype.getWords = function(words, currentWord){
   // contained in this Trie.
   // it will use currentWord as a prefix,
   // since a Trie doesn't know about its parents.
+  words = words || [];
+  currentWord = currentWord || "";
+  console.log("currentWord= " + currentWord);
+  for (var char in this.characters) {
+    // console.log("at line 43 char is " + char);
+    currentWord += char;
+    if (this.characters[char].isWord) {
+      words.push(currentWord);
+    }
+    // console.log("char.characters = "+char.characters);
+    // console.log("this = " + this);
+    // console.log("char = " + char);
+    if (this.characters[char].characters) {
+      this.characters[char].getWords(words, currentWord);
+    } else {
+      currentWord = "";
+    }
+  // });
+  };
+  return words;
 };
 
 Trie.prototype.find = function(word, index){
