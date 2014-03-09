@@ -57,11 +57,12 @@ Trie.prototype.getWords = function(words, currentWord){
 };
 
 Trie.prototype.find = function(word, index){
-
+ 
   word = word || "";
   index = index || 0;
   var node = word[index];
   
+
   if(this.characters[node]) {
     return this.characters[node].find(word, index + 1);
   } else if (index === word.length){
@@ -90,3 +91,11 @@ Trie.prototype.autoComplete = function(prefix){
   // for a given prefix.
   // It should use find and getWords.
 };
+
+
+
+
+
+
+
+
