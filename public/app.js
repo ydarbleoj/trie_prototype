@@ -21,15 +21,24 @@ $(document).ready(function(){
 
 // router 
 App.Routers.Main = Backbone.Router.extend({
-  routes: { "": "index" },
+  routes: { 
+    "":          "index", 
+    "/(:param)": "param_search"
+  },
 
   index: function(){
     var view = new App.Views.AppIndex();
     $('.container').append(view.render().el);
+  }, 
+
+  param_search: function(param){
+    var view = new App.Views.Index();
+    $("#container").append(view.render().el);
+    view.auto_search(param);
   }
 });
 
-//  VIEW --> INDEX 
+//  VIEW 
 
 App.Views.AppIndex = Backbone.View.extend({
 
@@ -47,29 +56,34 @@ App.Views.AppIndex = Backbone.View.extend({
   }, 
 
   search_fnc: function() {
-    var new_search = $('#search_bar').val();
-    var results = App.autocompleter.complete(new_search);
-    // $.each(results, function(index, value){
-      $('#titles').html(results);
-    // })
-  }
-});
-
-//  VIEW --> SHOW 
-
-App.Views.AppShow = Backbone.View.extend({ 
-
-  id: "", 
-
-  events: {
-
+    $('#titles').empty();
+    var wiki_title = $('#search_bar').val();
+    var results = App.autocompleter.complete(wiki_title);
+    $.each(results, function(index, value){
+      $('#titles').append("<li><a href=\"https://en.wikipedia.org/wiki/"+ value + "\">"+ value + "</li>");
+    });
   }, 
 
-  render: function() {
-
+  params_search: function(param) {
+    var results = App.autocompleter.complete(param);
+    $.each(results, function(index, value){
+      $("#titles").append("<li><a href=\"https://en.wikipedia.org/wiki/"+ value + "\">"+ value + "</li>");
+        $('#titles').html(results);
+    });
   }
 
-})
+});
+
+
+ 
+ //  auto_search: function(param){
+ //    var results = App.autocompleter.complete(param);
+ //     $.each(results, function(index, value){
+ //          $("#titles").append("<li><a href=\"https://en.wikipedia.org/wiki/"+ value + "\">"+ value + "</li>");
+ //          // $("#titles").html(results);
+ //        });
+ //  }
+
 
 
 

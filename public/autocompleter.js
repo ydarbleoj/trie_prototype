@@ -2,8 +2,6 @@ Autocompleter = function(){
   // Trie mode:
   this.data = new Trie();
 
-  // Array mode:
-  //this.data = [];
 };
 
 Autocompleter.prototype.complete = function(prefix){
