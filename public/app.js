@@ -23,7 +23,6 @@ $(document).ready(function(){
 App.Routers.Main = Backbone.Router.extend({
   routes: { 
     "":          "index", 
-    "/(:param)": "param_search"
   },
 
   index: function(){
@@ -31,11 +30,6 @@ App.Routers.Main = Backbone.Router.extend({
     $('.container').append(view.render().el);
   }, 
 
-  param_search: function(param){
-    var view = new App.Views.Index();
-    $("#container").append(view.render().el);
-    view.auto_search(param);
-  }
 });
 
 //  VIEW 
