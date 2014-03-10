@@ -70,15 +70,5 @@ App.Views.AppIndex = Backbone.View.extend({
 
 
  
- //  auto_search: function(param){
- //    var results = App.autocompleter.complete(param);
- //     $.each(results, function(index, value){
- //          $("#titles").append("<li><a href=\"https://en.wikipedia.org/wiki/"+ value + "\">"+ value + "</li>");
- //          // $("#titles").html(results);
- //        });
- //  }
-
-
-
 
 
